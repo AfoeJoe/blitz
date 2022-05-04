@@ -1,4 +1,5 @@
-import { RouterContext, BlitzRouter, BlitzProvider } from "blitz"
+import { BlitzProvider, BlitzRouter, RouterContext } from "blitz"
+import { FunctionComponent } from "react"
 import { render as defaultRender } from "@testing-library/react"
 import { renderHook as defaultRenderHook } from "@testing-library/react-hooks"
 
@@ -30,13 +31,13 @@ export function render(
 ) {
   if (!wrapper) {
     // Add a default context wrapper if one isn't supplied from the test
-    wrapper = ({ children }: { children: React.ReactNode }) => (
+    wrapper = /* ({ children }: { children: React.ReactNode }) => (
       <BlitzProvider dehydratedState={dehydratedState}>
         <RouterContext.Provider value={{ ...mockRouter, ...router }}>
           {children}
         </RouterContext.Provider>
       </BlitzProvider>
-    )
+    ) */ undefined
   }
   return defaultRender(ui, { wrapper, ...options })
 }
@@ -58,13 +59,13 @@ export function renderHook(
 ) {
   if (!wrapper) {
     // Add a default context wrapper if one isn't supplied from the test
-    wrapper = ({ children }) => (
+    wrapper = /* ({ children }) => (
       <BlitzProvider dehydratedState={dehydratedState}>
         <RouterContext.Provider value={{ ...mockRouter, ...router }}>
           {children}
         </RouterContext.Provider>
       </BlitzProvider>
-    )
+    ) */ undefined
   }
   return defaultRenderHook(hook, { wrapper, ...options })
 }

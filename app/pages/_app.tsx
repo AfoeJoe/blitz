@@ -1,3 +1,5 @@
+import LoginForm from "app/auth/components/LoginForm"
+import "app/styles/styles.css"
 import {
   AppProps,
   ErrorBoundary,
@@ -7,7 +9,6 @@ import {
   ErrorFallbackProps,
   useQueryErrorResetBoundary,
 } from "blitz"
-import LoginForm from "app/auth/components/LoginForm"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
