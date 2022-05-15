@@ -1,7 +1,7 @@
 import classnames from "classnames"
 import { ComponentPropsWithoutRef, FC, ReactNode, useState } from "react"
 
-type TAccordion = {
+export type TAccordion = {
   data: Array<{ header: string; content: ReactNode; active?: boolean }>
   defaultActiveKey?: number
 }

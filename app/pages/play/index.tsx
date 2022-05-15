@@ -1,7 +1,6 @@
 import Layout from "app/core/layouts/Layout"
-import { BlitzPage, Head, Link, Routes, usePaginatedQuery, useRouter } from "blitz"
+import { BlitzPage, Head, Link } from "blitz"
 import { Card } from "app/core/components"
-import { Suspense } from "react"
 
 const PlayPage: BlitzPage = () => {
   return (
@@ -18,12 +17,12 @@ const PlayPage: BlitzPage = () => {
             <Card>English </Card>
           </a>
         </Link>
-        <Link href={"./play/PHYSICS"}>
+        <Link href={"./play/physics"}>
           <a>
             <Card>Physics </Card>{" "}
           </a>
         </Link>
-        <Link href={"./play/Maths"}>
+        <Link href={"./play/maths"}>
           <a>
             <Card>Maths </Card>{" "}
           </a>
@@ -38,7 +37,7 @@ const PlayPage: BlitzPage = () => {
   )
 }
 
-PlayPage.authenticate = true
+// PlayPage.authenticate = true
 PlayPage.getLayout = (page) => <Layout>{page}</Layout>
 
 export default PlayPage

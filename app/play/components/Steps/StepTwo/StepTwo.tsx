@@ -48,19 +48,19 @@ export const StepTwo: FC<StepTwoProps> = ({ questions, setActiveStep, useQuizRes
       <div>
         {options?.map((item, index) => (
           <Button
-            /* variant={variant} */ className="mb-2"
+            className="mb-2"
             id={index.toString()}
             onClick={actions.checkAnswer}
             key={index}
             size={Size.small}
-            bgColor={Color.red}
-            textColor={Color.red}
+            border={Color.black}
+            textColor={Color.black}
           >
             {item}
           </Button>
         ))}
       </div>
-      <Dots userAnswers={userAnswers} />
+      <Dots userAnswers={userAnswers} currentIndex={currentQuestionIndex} />
     </>
   ) : (
     <>no data to display</>

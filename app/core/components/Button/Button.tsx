@@ -28,7 +28,7 @@ export function Button({
     <button
       {...props}
       className={classnames(
-        `${TEXT_COLOR_MAP[textColor]} ${BG_COLOR_MAP[bgColor]}  font-bold py-2 px-4  ${BORDER_COLOR_MAP[border]} rounded`,
+        `${TEXT_COLOR_MAP[textColor]} ${BG_COLOR_MAP[bgColor]}   font-bold py-2 px-4  ${BORDER_COLOR_MAP[border]} rounded`,
         {
           "text-xs": size === Size.small,
           "text-xl": size === Size.large,

@@ -10,14 +10,16 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "husky install",
-    "seed": "blitz prisma db seed",
-    "push": "blitz prisma db push"
+    "seed": "blitz db seed",
+    "push": "blitz prisma db push",
+    "db-reset": "blitz prisma migrate reset",
+    "db-dev": "blitz prisma migrate dev"
   },
   "prisma": {
     "schema": "db/schema.prisma",
     "seed2": "node --loader ts-node/esm db/seed.ts",
-    "seed3": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
-    "seed": "node --require esbuild-register prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} db/seed.ts",
+    "seed3": "node --require esbuild-register prisma/seed.ts"
   },
   "prettier": {
     "semi": false,

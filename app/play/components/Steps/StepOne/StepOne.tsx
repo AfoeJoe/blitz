@@ -1,4 +1,5 @@
 import { Button } from "app/core/components"
+import { Color } from "app/utils/tailwindHelpers"
 import { FC } from "react"
 
 type StepOneProps = {
@@ -13,8 +14,10 @@ export const StepOne: FC<StepOneProps> = ({ setActiveStep }) => {
   return (
     <div>
       <h1>Step One</h1>
-      <div>Just Generally instructtions</div>
-      <Button onClick={handleClick}>Go to next Step</Button>
+      <div>Instructions: Please, Have fun!</div>
+      <Button onClick={handleClick} bgColor={Color.black} textColor={Color.white}>
+        Start
+      </Button>
     </div>
   )
 }

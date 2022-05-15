@@ -18,10 +18,22 @@ const QuizComponent = () => {
 
   const [activeStep, setActiveStep] = useState<number>(1)
   const { sid } = router.query
-  const [questions] = useQuery(getQuestions, { where: { subject: sid as SUBJECT } })
+  const [questions] = useQuery(
+    getQuestions,
+    { where: { subject: sid as SUBJECT } },
+    {
+      refetchOnMount: false,
+      cacheTime: 5000,
+      refetchOnWindowFocus: false,
+    }
+  )
 
   const CurrentComponent = (sid && STEPS_HASH[activeStep - 1]) || StepOne
   const useQuizResult = useQuiz({ questions, setActiveStep })
+
+  console.log({
+    questions,
+  })
 
   return (
     <div>
@@ -39,11 +51,6 @@ const Play: BlitzPage = () => {
   return (
     <main role="main">
       <h1>Playing</h1>
-      {/* <Dot bgColor="danger" />
-      <Dot />
-      <Dot bgColor="success" />
-      <Dot size={45} />
-      <Dot /> */}
       <Suspense fallback={<div>Loading...</div>}>
         <QuizComponent />
       </Suspense>

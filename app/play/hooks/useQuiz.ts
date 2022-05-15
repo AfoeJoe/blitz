@@ -1,5 +1,7 @@
+import getQuestions from "app/play/queries/getQuestions"
 import { getCorrectness, getIniitialUserAnswers } from "app/utils/helpers"
-import { MouseEvent, useState } from "react"
+import { invalidateQuery } from "blitz"
+import { MouseEvent, useEffect, useState } from "react"
 import { Questions } from "@prisma/client"
 import { UserAnswer } from "app/utils/types"
 
@@ -13,6 +15,10 @@ const useQuiz = ({ questions, setActiveStep }: UseQuiz) => {
   )
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  console.log({
+    userAnswers,
+    questions,
+  })
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex >= questions.length - 1) {
@@ -25,9 +31,6 @@ const useQuiz = ({ questions, setActiveStep }: UseQuiz) => {
   })
 
   const checkAnswer = (event: MouseEvent<HTMLElement>) => {
-    console.log({
-      event,
-    })
     const { id } = event.target as HTMLInputElement
 
     setUserAnswers((prev) => {
@@ -47,13 +50,18 @@ const useQuiz = ({ questions, setActiveStep }: UseQuiz) => {
   const getResult = () => {
     return [
       userAnswers.reduce((acc, cur, index) => {
-        return cur.selected === questions[index]?.correctAnswer ? 1 : 0
+        return cur.selected === questions[index]?.correctAnswer ? acc + 1 : acc + 0
       }, 0),
       questions.length,
     ]
   }
 
+  useEffect(() => {
+    setUserAnswers(getIniitialUserAnswers(questions.length))
+  }, [questions.length])
+
   const reset = () => {
+    invalidateQuery(getQuestions)
     setUserAnswers(getIniitialUserAnswers(questions.length))
     setCurrentQuestionIndex(0)
     setActiveStep(2)
