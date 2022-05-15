@@ -1,14 +1,14 @@
-import { ReactNode, PropsWithoutRef } from "react"
+import { Button } from "."
+import { Color, Size } from "app/utils/tailwindHelpers"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
-import { z } from "zod"
+import { PropsWithoutRef, ReactNode } from "react"
 import { validateZodSchema } from "blitz"
+import { z } from "zod"
 export { FORM_ERROR } from "final-form"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
-  /** All your form fields */
   children?: ReactNode
-  /** Text to display in the submit button */
   submitText?: string
   schema?: S
   onSubmit: FinalFormProps<z.infer<S>>["onSubmit"]
@@ -34,22 +34,22 @@ export function Form<S extends z.ZodType<any, any>>({
           {children}
 
           {submitError && (
-            <div role="alert" style={{ color: "red" }}>
+            <div role="alert" className="text-red-500 text-xs italic">
               {submitError}
             </div>
           )}
 
           {submitText && (
-            <button type="submit" disabled={submitting}>
+            <Button
+              disabled={submitting}
+              type="submit"
+              size={Size.small}
+              bgColor={Color.black}
+              textColor={Color.white}
+            >
               {submitText}
-            </button>
+            </Button>
           )}
-
-          <style global jsx>{`
-            .form > * + * {
-              margin-top: 1rem;
-            }
-          `}</style>
         </form>
       )}
     />

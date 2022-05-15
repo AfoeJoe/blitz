@@ -1,6 +1,6 @@
-import { render } from "test/utils"
-
 import Home from "./index"
+import { render } from "test/utils"
+import { ROLE } from "@prisma/client"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 
 jest.mock("app/core/hooks/useCurrentUser")
@@ -16,7 +16,7 @@ test.skip("renders blitz documentation link", () => {
     id: 1,
     name: "User",
     email: "user@email.com",
-    role: "user",
+    role: ROLE.user,
   })
 
   const { getByText } = render(<Home />)

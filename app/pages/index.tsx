@@ -1,10 +1,6 @@
-import Button from "app/UIComponents/Buttons/Buttons"
-import DropDown from "app/UIComponents/DropDown/DropDown"
 import Layout from "app/core/layouts/Layout"
-import logo from "public/logo.png"
 import logout from "app/auth/mutations/logout"
 import { BlitzPage, Image, Link, Routes, useMutation } from "blitz"
-import { Color, Size } from "app/undecided/tailwindHelpers"
 import { Suspense } from "react"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 /*
@@ -44,7 +40,7 @@ const UserInfo = () => {
         </Link>
         <Link href={Routes.LoginPage()}>
           <a className="button small">
-            <em>Login</em>
+            <em>Logiwn</em>
           </a>
         </Link>
       </>

@@ -1,15 +1,12 @@
-import Accordion from "app/UIComponents/Accordion/Accordion"
-import Button from "app/UIComponents/Buttons/Buttons"
-import Card from "app/UIComponents/Card/Card"
-import DropDown from "app/UIComponents/DropDown/DropDown"
 import Layout from "app/core/layouts/Layout"
-import Modal from "app/UIComponents/Modal/Modal"
 import React, { useState } from "react"
+import { Accordion, Button, Card, DropDown, Modal } from "app/core/components"
 import { BlitzPage } from "blitz"
-import { Color, Size } from "app/undecided/tailwindHelpers"
+import { Color, Size } from "app/utils/tailwindHelpers"
 
 const RC: BlitzPage = () => {
   const [modalVisible, setModalVisible] = useState(false)
+
   return (
     <div>
       <Button size={Size.small} bgColor={Color.green} textColor={Color.red}>

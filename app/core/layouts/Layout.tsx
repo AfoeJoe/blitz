@@ -2,6 +2,8 @@ import classnames from "classnames"
 import logo from "public/logo.png"
 import styles from "./Layout.module.css"
 import { BlitzLayout, Head, Image, Link } from "blitz"
+import Nav from "../components/Nav/Nav"
+import { Suspense } from "react"
 
 const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
   title,
@@ -16,41 +18,15 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
       <div className={classnames(styles.wrapper, "h-screen")}>
         <header className={classnames(styles.header, "h-9 text-center")}>
           <div className="logo cursor-pointer">
-            <Link href="./">
+            <Link href="/">
               <Image src={logo} alt="blitzjs" layout="fixed" width={"100px"} height={"36px"} />
             </Link>
           </div>
         </header>
-        <nav className={classnames(styles.nav, "sticky top-0 w-full")}>
-          <ul className="overflow-x-auto flex-nowrap whitespace-nowrap w-screen ">
-            <li>
-              <Link href="./play">
-                <a href="">Play</a>
-              </Link>
-            </li>
+        <Suspense fallback="Loading...">
+          <Nav />
+        </Suspense>
 
-            <li>
-              <Link href="./browse">
-                <a href="">Browse</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="./leaderboard">
-                <a href="">LeaderBoard</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="./profile">
-                <a href="">Profile</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="./">
-                <a href="">Logout</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
         <section role="main" className={styles.content}>
           {children}
         </section>

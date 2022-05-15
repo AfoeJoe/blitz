@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -19,10 +19,12 @@ model User {
   name           String?
   email          String   @unique
   hashedPassword String?
-  role           String   @default("USER")
+  role           ROLE     @default(user)
 
   tokens   Token[]
   sessions Session[]
+  // Profile  Profile[]
+  Attempts Attempts[]
 }
 
 model Session {
@@ -63,3 +65,80 @@ model Token {
 // enum TokenType {
 //   RESET_PASSWORD
 // }
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+}
+
+// post is qusestion
+model Questions {
+  id            Int      @id @default(autoincrement())
+  question      String
+  options       String[]
+  correctAnswer Int
+  hintText      String?
+  photoUrl      String?
+  subject       SUBJECT?
+
+  QuestionsMeta QuestionsMeta[]
+
+  @@index([subject])
+}
+
+model QuestionsMeta {
+  id        Int       @id @default(autoincrement())
+  year      DateTime?
+  exam      EXAM      @default(undertermined)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  published Boolean   @default(true)
+
+  totalAppearances Int?      @default(0)
+  average          Int?      @default(0)
+  question         Questions @relation(fields: [questionsId], references: [id])
+  questionsId      Int
+
+  @@index([average])
+}
+
+// model Profile {
+//   id     Int     @id @default(autoincrement())
+//   bio    String?
+//   user   User    @relation(fields: [userId], references: [id])
+//   userId Int     @unique
+//   role   Role    @default(USER)
+
+// }
+
+model Attempts {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  result      Int //977 === 97.7%
+  questionId  Int[]
+  userAnswers Int[]
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+
+}
+
+enum EXAM {
+  waec
+  jamb
+  undertermined
+}
+
+enum SUBJECT {
+  english
+  maths
+  biology
+  physics
+  chemistry
+}
+
+enum ROLE {
+  admin
+  user
+}

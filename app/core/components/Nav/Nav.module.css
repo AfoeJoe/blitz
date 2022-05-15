@@ -1,0 +1,18 @@
+.nav {
+  grid-area: nav;
+  /* border: 1px solid brown; */
+}
+
+.nav ul {
+  display: flex;
+  gap: 20px;
+  width: 100vw;
+  justify-content: space-between;
+}
+
+@media (min-width: 769px) {
+  .nav ul {
+    flex-direction: column;
+    width: auto;
+  }
+}

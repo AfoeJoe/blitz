@@ -7,10 +7,7 @@
   min-height: calc(100vh - 120px);
   /* border: 1px solid brown; */
 }
-.nav {
-  grid-area: nav;
-  /* border: 1px solid brown; */
-}
+
 .side {
   grid-area: sidebar;
   /* border: 1px solid brown; */
@@ -38,12 +35,6 @@
     "ad"
     "footer";
 }
-.nav ul {
-  display: flex;
-  gap: 20px;
-  width: 100vw;
-  justify-content: space-between;
-}
 
 @media (min-width: 500px) {
   .wrapper {
@@ -67,9 +58,5 @@
       "nav    content sidebar"
       "nav    content ad"
       "footer footer  footer";
-  }
-  .nav ul {
-    flex-direction: column;
-    width: auto;
   }
 }
