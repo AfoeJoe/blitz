@@ -1,8 +1,10 @@
 import Dots from "./Dots"
 import Image from "next/image"
 import React, { FC } from "react"
+import { AnswerState } from "app/utils/types"
 import { Button } from "app/core/components"
 import { Color, Size } from "app/utils/tailwindHelpers"
+import { getColor, getCorrectnessWithIndex } from "app/utils/helpers"
 import { Questions } from "@prisma/client"
 import { UseQuizResult } from "app/play/hooks/useQuiz"
 
@@ -36,9 +38,7 @@ export const StepTwo: FC<StepTwoProps> = ({ questions, setActiveStep, useQuizRes
   const { currentQuestionIndex, userAnswers, actions } = useQuizResult
   const { question, correctAnswer, options, photoUrl, hintText } =
     questions[currentQuestionIndex] || {}
-  // const variant = userAnswers[currentQuestion] ? Variant.BLUE_GHOST : Variant.BLUE_GHOST;
-  // const correct = getCorrectness(correctAnswer, userAnswers[currentQuestionIndex]);
-
+  // const answer = userAnswers[index]
   return Boolean(question) ? (
     <>
       <div>Step Two QUiZ</div>
@@ -46,19 +46,35 @@ export const StepTwo: FC<StepTwoProps> = ({ questions, setActiveStep, useQuizRes
       <div>{question}</div>
       {hintText && <div>{hintText}</div>}
       <div>
-        {options?.map((item, index) => (
-          <Button
-            className="mb-2"
-            id={index.toString()}
-            onClick={actions.checkAnswer}
-            key={index}
-            size={Size.small}
-            border={Color.black}
-            textColor={Color.black}
-          >
-            {item}
-          </Button>
-        ))}
+        {options?.map((item, index) => {
+          const cor = getCorrectnessWithIndex(
+            correctAnswer as number,
+            index,
+            userAnswers[currentQuestionIndex]?.selected
+          )
+          console.log({
+            answer: cor,
+            correctAnswer,
+            index,
+            selected: userAnswers[currentQuestionIndex]?.selected,
+            userAnswers,
+          })
+
+          return (
+            <Button
+              className="mb-2"
+              id={index.toString()}
+              onClick={actions.checkAnswer}
+              key={index}
+              size={Size.small}
+              border={Color.black}
+              textColor={Color.black}
+              bgColor={Color[getColor(cor)]}
+            >
+              {item}
+            </Button>
+          )
+        })}
       </div>
       <Dots userAnswers={userAnswers} currentIndex={currentQuestionIndex} />
     </>

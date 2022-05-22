@@ -1,15 +1,19 @@
 import getQuestions from "app/play/queries/getQuestions"
+import { ACTIVE_STEPS } from "../model"
 import { getCorrectness, getIniitialUserAnswers } from "app/utils/helpers"
 import { invalidateQuery } from "blitz"
 import { MouseEvent, useEffect, useState } from "react"
 import { Questions } from "@prisma/client"
 import { UserAnswer } from "app/utils/types"
+import { useSaveAttempt } from "app/profile/hooks/unused"
+import { useSaveAttemptHook } from "./useSaveAttempt"
 
 type UseQuiz = {
   questions: Questions[]
-  setActiveStep: React.Dispatch<React.SetStateAction<number>>
+  // setActiveStep: React.Dispatch<React.SetStateAction<number>>
 }
-const useQuiz = ({ questions, setActiveStep }: UseQuiz) => {
+const useQuiz = ({ questions }: UseQuiz) => {
+  const [activeStep, setActiveStep] = useState<ACTIVE_STEPS>(1)
   const [userAnswers, setUserAnswers] = useState<Array<UserAnswer>>(
     getIniitialUserAnswers(questions.length)
   )
@@ -20,9 +24,15 @@ const useQuiz = ({ questions, setActiveStep }: UseQuiz) => {
     questions,
   })
 
+  useEffect(() => {
+    setUserAnswers(getIniitialUserAnswers(questions.length))
+  }, [questions.length])
+
+  useSaveAttemptHook(activeStep)
+
   const handleNextQuestion = () => {
     if (currentQuestionIndex >= questions.length - 1) {
-      setActiveStep(3)
+      setActiveStep(ACTIVE_STEPS.THREE)
     } else setCurrentQuestionIndex((prev) => prev + 1)
   }
   console.log({
@@ -56,18 +66,15 @@ const useQuiz = ({ questions, setActiveStep }: UseQuiz) => {
     ]
   }
 
-  useEffect(() => {
-    setUserAnswers(getIniitialUserAnswers(questions.length))
-  }, [questions.length])
-
   const reset = () => {
     invalidateQuery(getQuestions)
     setUserAnswers(getIniitialUserAnswers(questions.length))
     setCurrentQuestionIndex(0)
-    setActiveStep(2)
+    setActiveStep(ACTIVE_STEPS.TWO)
   }
 
   return {
+    activeStep,
     currentQuestionIndex,
     userAnswers,
     actions: {
@@ -75,6 +82,7 @@ const useQuiz = ({ questions, setActiveStep }: UseQuiz) => {
       checkAnswer,
       getResult,
       reset,
+      setActiveStep,
     },
   }
 }

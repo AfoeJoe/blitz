@@ -1,6 +1,7 @@
 import React, { FC, useMemo } from "react"
 import { Accordion, Button } from "app/core/components"
 import { AnswerState } from "app/utils/types"
+import { Color } from "app/utils/tailwindHelpers"
 import { getCorrectness, getCorrectnessWithIndex } from "app/utils/helpers"
 import { Questions } from "@prisma/client"
 import { TAccordion } from "app/core/components/Accordion/Accordion"
@@ -32,8 +33,8 @@ export const StepThree: FC<StepThreeProps> = ({ useQuizResult, questions }) => {
             {options.map((item, optionIndex) => {
               const correct2 = getCorrectnessWithIndex(
                 correctAnswer,
-                userAnswers[index]?.selected!,
-                optionIndex
+                optionIndex,
+                userAnswers[index]?.selected
               )
               return (
                 <span
@@ -62,7 +63,9 @@ export const StepThree: FC<StepThreeProps> = ({ useQuizResult, questions }) => {
       <div>
         {<Accordion data={questionData} />}
 
-        <Button onClick={reset}>New Round</Button>
+        <Button onClick={reset} bgColor={Color.green}>
+          New Round
+        </Button>
       </div>
     </>
   )

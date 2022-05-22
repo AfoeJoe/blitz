@@ -1,9 +1,9 @@
-import logout from "app/auth/mutations/logout"
-import { Link, useMutation } from "blitz"
 import classnames from "classnames"
+import logout from "app/auth/mutations/logout"
 import React from "react"
-import { useCurrentUser } from "../../hooks/useCurrentUser"
 import styles from "./Nav.module.css"
+import { Link, useMutation } from "blitz"
+import { useCurrentUser } from "../../hooks/useCurrentUser"
 
 export function Nav() {
   const currentUser = useCurrentUser()
@@ -33,7 +33,7 @@ export function Nav() {
             <>
               {" "}
               <li>
-                <Link href="./profile">
+                <Link href="/profile">
                   <a href="">Profile</a>
                 </Link>
               </li>

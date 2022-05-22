@@ -1,17 +1,18 @@
 import classnames from "classnames"
 import React, { ComponentPropsWithoutRef, FC, memo } from "react"
 import styles from "./Dot.module.css"
+import { Color } from "app/utils/tailwindHelpers"
 
 type DotProps = {
   children?: React.ReactNode
-  bgColor?: "danger" | "success" | "light"
+  bgColor?: Color
   className?: string
   active?: boolean
 }
 
 const Dot: React.FunctionComponent<DotProps> = ({
   children,
-  bgColor = "light",
+  bgColor = Color.white,
   active = false,
   className,
   ...props
@@ -19,9 +20,9 @@ const Dot: React.FunctionComponent<DotProps> = ({
   return (
     <span
       className={classnames(/* `bg-${bgColor}`, */ "w-5 h-5 inline-block rounded-full", {
-        "bg-white border": bgColor === "light",
-        "bg-green-900": bgColor === "success",
-        "bg-red-900 ": bgColor === "danger",
+        "bg-white border": bgColor === Color.white,
+        "bg-green-900": bgColor === Color.green,
+        "bg-red-900 ": bgColor === Color.red,
         "w-7 h-7": active,
       })}
       // style={{ width: size, height: size }}

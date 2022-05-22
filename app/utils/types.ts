@@ -1,6 +1,6 @@
 export enum AnswerState {
-  CORRECT,
   WRONG,
+  CORRECT,
   NEUTRAL,
 }
 

@@ -16,7 +16,6 @@ const STEPS_HASH: React.ComponentType<StepsProps>[] = [StepOne, StepTwo, StepThr
 const QuizComponent = () => {
   const router = useRouter()
 
-  const [activeStep, setActiveStep] = useState<number>(1)
   const { sid } = router.query
   const [questions] = useQuery(
     getQuestions,
@@ -28,8 +27,12 @@ const QuizComponent = () => {
     }
   )
 
+  const useQuizResult = useQuiz({ questions })
+  const {
+    activeStep,
+    actions: { setActiveStep },
+  } = useQuizResult
   const CurrentComponent = (sid && STEPS_HASH[activeStep - 1]) || StepOne
-  const useQuizResult = useQuiz({ questions, setActiveStep })
 
   console.log({
     questions,
