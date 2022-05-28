@@ -13,7 +13,8 @@
     "seed": "blitz db seed",
     "push": "blitz prisma db push",
     "db-reset": "blitz prisma migrate reset",
-    "db-dev": "blitz prisma migrate dev"
+    "db-dev": "blitz prisma migrate dev",
+    "db-deploy": "blitz prisma migrate deploy"
   },
   "prisma": {
     "schema": "db/schema.prisma",
