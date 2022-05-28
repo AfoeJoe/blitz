@@ -6,12 +6,19 @@ on:
     branches: [master]
 jobs:
   build:
-    runs-on: [macos-latest, Ubuntu-latest, windows-lastest]
+    env:
+      CI: true
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+        platform: [macos-latest, Ubuntu-latest, windows-lastest]
+    runs-on: ${{matrix.platform}}
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.JS version 16
+      - name: Use Node.JS version ${{matrix.node-version}}
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: ${{matrix.node-version}}
       - run: npm install
       - run: npm run build
+      - run: npm run test
