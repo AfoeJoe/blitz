@@ -11,8 +11,10 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/quiz?schema=public
     strategy:
       matrix:
-        node-version: [16.x]
-        platform: [macos-latest, Ubuntu-latest]
+        node-version:
+          [16.x]
+          # platform: [macos-latest, Ubuntu-latest]
+        platform: [Ubuntu-latest]
     runs-on: ${{matrix.platform}}
     steps:
       - uses: actions/checkout@v2
