@@ -10,11 +10,12 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "husky install",
-    "seed": "blitz db seed",
-    "push": "blitz prisma db push",
+    "db-seed": "blitz db seed",
+    "db-push": "blitz prisma db push",
     "db-reset": "blitz prisma migrate reset",
     "db-dev": "blitz prisma migrate dev",
-    "db-deploy": "blitz prisma migrate deploy"
+    "db-deploy": "blitz prisma migrate deploy",
+    "db-pull": "blitz prisma db pull"
   },
   "prisma": {
     "schema": "db/schema.prisma",

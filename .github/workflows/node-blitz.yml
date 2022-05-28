@@ -8,7 +8,8 @@ jobs:
   build:
     env:
       CI: true
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/quiz?schema=public
+      DATABASE_URL: postgresql://postgres:postgres@localhost/quiz?schema=public
+      SESSION_SECRET_KEY: 5d41404atbc43326b9719d911017c592
     strategy:
       matrix:
         node-version:
