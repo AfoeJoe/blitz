@@ -8,6 +8,7 @@ jobs:
   build:
     env:
       CI: true
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/quiz?schema=public
     strategy:
       matrix:
         node-version: [16.x]
@@ -19,6 +20,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node-version}}
+      - name: Setup PostgreSQL 14
+        uses: Harmon758/postgresql-action@v1.0.0
+        with:
+          postgresql version: "14" # See https://hub.docker.com/_/postgres for available versions
       - run: npm install
       - run: npm run build
       - run: npm run db-deploy
