@@ -42,7 +42,7 @@ const colorHash: Record<AnswerState, keyof typeof Color /* "danger" | "success" 
 
 export const getColor = (correct: AnswerState) => colorHash[correct]
 
-export const getIniitialUserAnswers = (length: number) =>
+export const getInitialUserAnswers = (length: number) =>
   Array(length).fill({
     selected: null,
     correct: AnswerState.NEUTRAL,

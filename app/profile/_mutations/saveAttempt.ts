@@ -6,7 +6,7 @@ export const SaveAtttempt = z.object({
   result: z.number(),
   questions: z.array(z.number()),
   userAnswers: z.array(z.number()),
-}) /* .passthrough() */
+})
 export default async function saveAttempt(input: z.infer<typeof SaveAtttempt>, ctx: Ctx) {
   ctx.session.$authorize()
   const data = { ...SaveAtttempt.parse(input), user: ctx.session.userId }

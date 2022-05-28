@@ -1,12 +1,11 @@
 import getQuestions from "app/play/queries/getQuestions"
 import { ACTIVE_STEPS } from "../model"
-import { getCorrectness, getIniitialUserAnswers } from "app/utils/helpers"
+import { getCorrectness, getInitialUserAnswers } from "app/utils/helpers"
 import { invalidateQuery } from "blitz"
 import { MouseEvent, useEffect, useState } from "react"
 import { Questions } from "@prisma/client"
 import { UserAnswer } from "app/utils/types"
-import { useSaveAttempt } from "app/profile/hooks/unused"
-import { useSaveAttemptHook } from "./useSaveAttempt"
+// import { useSaveAttemptHook } from "./useSaveAttempt"
 
 type UseQuiz = {
   questions: Questions[]
@@ -15,7 +14,7 @@ type UseQuiz = {
 const useQuiz = ({ questions }: UseQuiz) => {
   const [activeStep, setActiveStep] = useState<ACTIVE_STEPS>(1)
   const [userAnswers, setUserAnswers] = useState<Array<UserAnswer>>(
-    getIniitialUserAnswers(questions.length)
+    getInitialUserAnswers(questions.length)
   )
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -25,10 +24,10 @@ const useQuiz = ({ questions }: UseQuiz) => {
   })
 
   useEffect(() => {
-    setUserAnswers(getIniitialUserAnswers(questions.length))
+    setUserAnswers(getInitialUserAnswers(questions.length))
   }, [questions.length])
 
-  useSaveAttemptHook(activeStep)
+  //useSaveAttemptHook(activeStep, {})
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex >= questions.length - 1) {
@@ -68,7 +67,7 @@ const useQuiz = ({ questions }: UseQuiz) => {
 
   const reset = () => {
     invalidateQuery(getQuestions)
-    setUserAnswers(getIniitialUserAnswers(questions.length))
+    setUserAnswers(getInitialUserAnswers(questions.length))
     setCurrentQuestionIndex(0)
     setActiveStep(ACTIVE_STEPS.TWO)
   }

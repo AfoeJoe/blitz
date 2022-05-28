@@ -1,12 +1,12 @@
-import saveAttempt from "app/profile/mutations/saveAttempt"
+import saveAttempt from "app/profile/_mutations/saveAttempt"
 import { ACTIVE_STEPS } from "../model"
 import { PromiseReturnType } from "blitz"
-import { SaveAtttempt } from "./../../profile/mutations/saveAttempt"
+// import { SaveAtttempt } from "./../../profile/mutations/saveAttempt"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import { useEffect } from "react"
 import { useMutation } from "blitz"
 
-export const useSaveAttemptHook = (activeStep: ACTIVE_STEPS, data: any) => {
+/* export const useSaveAttemptHook = (activeStep: ACTIVE_STEPS, data: any) => {
   const [saveAttemptMutation] = useMutation(saveAttempt)
   const user = useCurrentUser()
   useEffect(() => {
@@ -16,3 +16,4 @@ export const useSaveAttemptHook = (activeStep: ACTIVE_STEPS, data: any) => {
     return () => {}
   }, [activeStep, data, saveAttemptMutation, user])
 }
+ */
